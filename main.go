@@ -68,7 +68,7 @@ func AutoReloadJSON() {
 			log.Fatal("[error] occured while marshaling status data: ", err.Error())
 		}
 
-		if err = ioutil.WriteFile("data.json", jsonData, 0644); err != nil {
+		if err = ioutil.WriteFile("data/data.json", jsonData, 0644); err != nil {
 			log.Fatal("[error] occured while writing json data: ", err.Error())
 		}
 
@@ -77,7 +77,7 @@ func AutoReloadJSON() {
 }
 
 func AutoReloadWeb(w http.ResponseWriter, r *http.Request) {
-	fileData, err := ioutil.ReadFile("data.json")
+	fileData, err := ioutil.ReadFile("data/data.json")
 
 	if err != nil {
 		log.Fatal("[error] error occured while reading data.json file: ", err.Error())
@@ -104,7 +104,7 @@ func AutoReloadWeb(w http.ResponseWriter, r *http.Request) {
 		"windStatus":  windStatus,
 	}
 
-	tpl, err := template.ParseFiles("index.html")
+	tpl, err := template.ParseFiles("view/index.html")
 
 	if err != nil {
 		log.Fatal("[error] error occured while parsing html: ", err.Error())
