@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="refresh" content="15" />
+		<title>Water and Wind Data</title>
+	</head>
+	<body>
+		<center>
+			<table>
+				<tr>
+					<td>
+						<div id="waterData">
+							<p>Water Value:</p>
+							<h4>{{.waterValue}} meter</h4>
+							<br />
+							<p>Water Status:</p>
+							<h3 id="waterStatus">{{.waterStatus}}</h3>
+						</div>
+					</td>
+					<td width="200"></td>
+					<td>
+						<div id="windData">
+							<p>Wind Value:</p>
+							<h4>{{.windValue}} meter/second</h4>
+							<br />
+							<p>Wind Status:</p>
+							<h3 id="windStatus">{{.windStatus}}</h3>
+						</div>
+					</td>
+				</tr>
+			</table>
+
+			<!-- <hr> -->
+
+			<hr />
+			<div id="countdownTimer">
+				<div>Updating data in <span id="time">15</span> seconds</div>
+			</div>
+		</center>
+	</body>
+</html>
+
+<script>
+	function startTimer(duration, display) {
+		var timer = duration,
+			seconds;
+		setInterval(function () {
+			seconds = parseInt(timer % 60, 10);
+			seconds = seconds < 10 ? '0' + seconds : seconds;
+
+			display.textContent = seconds;
+
+			if (--timer < 0) {
+				timer = duration;
+			}
+			// console.log(seconds)
+		}, 1000);
+	}
+	window.onload = function () {
+		var decreaseCount = 14,
+			display = document.querySelector('#time');
+		startTimer(decreaseCount, display);
+	};
+
+	var waterStatus = document.getElementById('waterStatus');
+	var windStatus = document.getElementById('windStatus');
+
+	if (waterStatus.innerHTML == 'Aman') {
+		waterStatus.style.color = 'Green';
+	} else if (waterStatus.innerHTML == 'Siaga') {
+		waterStatus.style.color = 'Yellow';
+	} else if (waterStatus.innerHTML == 'Bahaya') {
+		waterStatus.style.color = 'Red';
+	} else {
+		waterStatus.style.color = 'Purple';
+	}
+
+	if (windStatus.innerHTML == 'Aman') {
+		windStatus.style.color = 'Green';
+	} else if (windStatus.innerHTML == 'Siaga') {
+		windStatus.style.color = 'Yellow';
+	} else if (windStatus.innerHTML == 'Bahaya') {
+		windStatus.style.color = 'Red';
+	} else {
+		windStatus.style.color = 'Purple';
+	}
+</script>
